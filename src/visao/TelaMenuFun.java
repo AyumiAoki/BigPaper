@@ -37,9 +37,9 @@ public class TelaMenuFun extends JPanel{
         
         setLayout(null);
         
-        fundo = new ImageIcon("src/imagens/fundoMenuFun.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoMenuFun.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
         
         //Inicialização e configurações dos botões         
         btnProduto = new JButton();
@@ -235,6 +235,26 @@ public class TelaMenuFun extends JPanel{
                 setVisible(false);
                 jf.add(telaFunSaida);
                 telaFunSaida.requestFocus();
+            }
+        });
+        
+        btnRelEstoque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaFunRelEstoque telaFunEstoque = new TelaFunRelEstoque(jf);
+                setVisible(false);
+                jf.add(telaFunEstoque);
+                telaFunEstoque.requestFocus();
+            }
+        });
+        
+        btnRelVenda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaFunRelVenda telaFunVenda = new TelaFunRelVenda(jf);
+                setVisible(false);
+                jf.add(telaFunVenda);
+                telaFunVenda.requestFocus();
             }
         });
         

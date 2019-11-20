@@ -54,10 +54,10 @@ public class TelaFunSaida extends JPanel {
 
         setLayout(null);
 
-        fundo = new ImageIcon("src/imagens/fundoFunSaida.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconMenu = new ImageIcon("src/imagens/iconMenu.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoFunSaida.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
 
         //Inicialização e configurações dos botões       
         btnSaidaProd = new JButton(iconSelecionado);
@@ -117,7 +117,7 @@ public class TelaFunSaida extends JPanel {
         txtCPF.setEditable(true);
 
         txtEndereco = new JTextField();
-        txtEndereco.setBounds(330, 233, 100, 20);
+        txtEndereco.setBounds(330, 233, 233, 20);
         txtEndereco.setBorder(new LineBorder(Color.BLACK, 2));
         txtEndereco.setFont(new Font("", Font.PLAIN, 12));
         txtEndereco.setCaretColor(Color.red);
@@ -137,7 +137,7 @@ public class TelaFunSaida extends JPanel {
         txtTotalGerado.setCaretColor(Color.GRAY);
         txtTotalGerado.setEditable(true);
 
-        //Configuração do painel de rolagem
+        //Configuração do painel de rolagem e tabela
         jspRolagem = new JScrollPane();
         jspRolagem.setBounds(205, 310, 615, 110);
         jspRolagem.setBackground(Color.GRAY);

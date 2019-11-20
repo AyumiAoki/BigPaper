@@ -30,12 +30,14 @@ public class TelaSaidaProd extends JPanel {
     private final ImageIcon iconSelecionado;
     private ImageIcon iconMenu;
     private ImageIcon iconFechar;
+    private final ImageIcon iconOla; 
 
     private JButton btnSaidaProd;
     private JButton btnMenu;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JButton btnFechar;
+    private JButton olaAdm;
 
     private JComboBox jcbNome;
 
@@ -54,10 +56,11 @@ public class TelaSaidaProd extends JPanel {
 
         setLayout(null);
 
-        fundo = new ImageIcon("src/imagens/fundoSaidaProd.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconMenu = new ImageIcon("src/imagens/iconMenu.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoSaidaProd.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
+        iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
 
         //Inicialização e configurações dos botões       
         btnSaidaProd = new JButton(iconSelecionado);
@@ -89,6 +92,12 @@ public class TelaSaidaProd extends JPanel {
         btnFechar.setContentAreaFilled(false);
         btnFechar.setBorderPainted(false);
         btnFechar.setFocusable(false);
+        
+        olaAdm = new JButton(iconOla);
+        olaAdm.setBounds(0, 65, 167, 65);
+        olaAdm.setContentAreaFilled(false);
+        olaAdm.setBorderPainted(false);
+        olaAdm.setFocusable(false);
 
         //Inicialização dos JComboBox
         jcbNome = new JComboBox();
@@ -117,7 +126,7 @@ public class TelaSaidaProd extends JPanel {
         txtCPF.setEditable(true);
 
         txtEndereco = new JTextField();
-        txtEndereco.setBounds(330, 233, 100, 20);
+        txtEndereco.setBounds(330, 233, 233, 20);
         txtEndereco.setBorder(new LineBorder(Color.BLACK, 2));
         txtEndereco.setFont(new Font("", Font.PLAIN, 12));
         txtEndereco.setCaretColor(Color.red);
@@ -137,7 +146,7 @@ public class TelaSaidaProd extends JPanel {
         txtTotalGerado.setCaretColor(Color.GRAY);
         txtTotalGerado.setEditable(true);
 
-        //Configuração do painel de rolagem
+        //Configuração do painel de rolagem e tabela
         jspRolagem = new JScrollPane();
         jspRolagem.setBounds(205, 310, 615, 110);
         jspRolagem.setBackground(Color.GRAY);
@@ -175,6 +184,7 @@ public class TelaSaidaProd extends JPanel {
         add(jspRolagem);
         add(txtTotalGerado);
         add(btnFechar);
+        add(olaAdm);
 
         btnMenu.addActionListener(new ActionListener() {
             @Override

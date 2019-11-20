@@ -55,10 +55,10 @@ public class TelaFunEntrada extends JPanel {
 
         setLayout(null);
 
-        fundo = new ImageIcon("src/imagens/fundoFunEntrada.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconMenu = new ImageIcon("src/imagens/iconMenu.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoFunEntrada.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
 
         //Inicialização e configurações dos botões       
         btnEntradaProd = new JButton(iconSelecionado);
@@ -145,7 +145,7 @@ public class TelaFunEntrada extends JPanel {
         txtTotalGerado.setCaretColor(Color.GRAY);
         txtTotalGerado.setEditable(true);
 
-        //Configuração do painel de rolagem
+        //Configuração do painel de rolagem e tabela
         jspRolagem = new JScrollPane();
         jspRolagem.setBounds(205, 310, 615, 110);
         jspRolagem.setBackground(Color.GRAY);

@@ -18,10 +18,10 @@ public class BigPaper extends JFrame{
     private ImageIcon fundo;
 
     public BigPaper() {
-        
+                
         telaLogin = new TelaLogin(this);
         telaMenuAdm = new TelaMenuAdm(this);
-        fundo = new ImageIcon("src/imagens/fundoMenuAdm.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoMenuAdm.png");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Big Paper");
         setSize(fundo.getIconWidth(), fundo.getIconHeight());

@@ -62,11 +62,12 @@ public class DaoFuncionario {
             rs = stmt.executeQuery();
             
             while(rs.next()){
+                
                 Funcionario funcionario = new Funcionario();
+                
                 funcionario.setNome(rs.getString("Nome"));
                 funcionario.setCpf(rs.getString("codigo"));
                 funcionario.setUsuario(rs.getString("Usuario"));
-                funcionario.setSenha(rs.getString("Senha"));
                 fun.add(funcionario);
                 i++;
             }
@@ -76,7 +77,7 @@ public class DaoFuncionario {
         }finally{
             ConnectionFactory.CloseConnection(con, stmt, rs);
         }
-        return fun;       
+        return fun;    
     }
     
     public boolean buscarFuncionario(String nome, String senha){
@@ -102,30 +103,6 @@ public class DaoFuncionario {
         }
         
         return encontrou;       
-    }
-    
-    public boolean verificarSenha(String nome){
-        
-        String sql = "select senha from Funcionario where nome = ?";
-        
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        boolean encontrou = false;
-                
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
-            rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                encontrou = true;
-            }
-        } catch (SQLException ex) {
-        }finally{
-            ConnectionFactory.CloseConnection(con, stmt, rs);
-        }
-        
-        return encontrou;  
     }
     
     public boolean atualizarFun(Funcionario f){
