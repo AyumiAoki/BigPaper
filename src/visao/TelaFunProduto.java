@@ -73,51 +73,51 @@ public class TelaFunProduto extends JPanel {
         btnProduto.setFocusable(false);
 
         btnMenu = new JButton(iconMenu);
-        btnMenu.setBounds(243, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
+        btnMenu.setBounds(230, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
         btnMenu.setBorderPainted(false);
         btnMenu.setFocusable(false);
 
         btnCadastrar = new JButton();
-        btnCadastrar.setBounds(311, 384, 100, 25);
+        btnCadastrar.setBounds(290, 383, 100, 25);
         btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setBorderPainted(false);
         btnCadastrar.setFocusable(false);
 
         btnConsultar = new JButton();
-        btnConsultar.setBounds(425, 384, 100, 25);
+        btnConsultar.setBounds(404, 383, 100, 25);
         btnConsultar.setContentAreaFilled(false);
         btnConsultar.setBorderPainted(false);
         btnConsultar.setFocusable(false);
 
         btnAlterar = new JButton();
-        btnAlterar.setBounds(539, 384, 100, 25);
+        btnAlterar.setBounds(518, 383, 100, 25);
         btnAlterar.setContentAreaFilled(false);
         btnAlterar.setBorderPainted(false);
         btnAlterar.setFocusable(false);
 
         btnExcluir = new JButton();
-        btnExcluir.setBounds(653, 384, 100, 25);
+        btnExcluir.setBounds(632, 383, 100, 25);
         btnExcluir.setContentAreaFilled(false);
         btnExcluir.setBorderPainted(false);
         btnExcluir.setFocusable(false);
 
         btnSalvar = new JButton(iconInativo);
-        btnSalvar.setBounds(367, 415, 100, 25);
+        btnSalvar.setBounds(346, 414, 100, 25);
         btnSalvar.setContentAreaFilled(false);
         btnSalvar.setBorderPainted(false);
         btnSalvar.setFocusable(false);
         btnSalvar.setEnabled(false);
 
         btnLimpar = new JButton(iconInativo);
-        btnLimpar.setBounds(478, 415, 100, 25);
+        btnLimpar.setBounds(457, 414, 100, 25);
         btnLimpar.setContentAreaFilled(false);
         btnLimpar.setBorderPainted(false);
         btnLimpar.setFocusable(false);
         btnLimpar.setEnabled(false);
 
         btnCancelar = new JButton(iconInativo);
-        btnCancelar.setBounds(589, 415, 100, 25);
+        btnCancelar.setBounds(568, 414, 100, 25);
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setFocusable(false);

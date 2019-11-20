@@ -2,17 +2,29 @@ package visao;
 
 import controle.BigPaper;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import modelo.DaoFuncionario;
 import modelo.Funcionario;
 
@@ -23,6 +35,7 @@ import modelo.Funcionario;
 public class TelaConsultaFun extends JPanel {
 
     private final BigPaper jf;
+    private TelaFuncionario telaFun;
 
     private JScrollPane jspRolagem;
     private JTable tabela;
@@ -41,14 +54,24 @@ public class TelaConsultaFun extends JPanel {
     private final ImageIcon iconOla;
 
     private DaoFuncionario daoFuncionario;
-    private Funcionario funcionario;
+    public Funcionario funSelecionado;
+    
+    TableColumn coluna1;
+    TableColumn coluna2;
+    TableColumn coluna3;
 
-    public TelaConsultaFun(final BigPaper jf) {
+    public TelaConsultaFun(final BigPaper jf, TelaFuncionario telaFun) {
 
         this.jf = jf;
+        this.telaFun = telaFun;
 
         setLayout(null);
-        
+
+        funSelecionado = new Funcionario();
+        daoFuncionario = new DaoFuncionario();
+
+        //telaFun = new TelaFuncionario(jf);
+
         //Inicialização das imagens
         fundo = new ImageIcon("src/imagens/fundoTelas/fundoConsultaFun.png");
         iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
@@ -95,13 +118,12 @@ public class TelaConsultaFun extends JPanel {
 
         //Configuração do painel de rolagem e tabela
         jspRolagem = new JScrollPane();
-        jspRolagem.setBounds(290, 210, 450, 80);
+        jspRolagem.setBounds(263, 210, 502, 69);
         jspRolagem.setBackground(Color.GRAY);
         jspRolagem.setBorder(new LineBorder(Color.BLACK, 1));
 
         tabela = new JTable();
         tabela.setBackground(Color.WHITE);
-        tabela.setGridColor(Color.BLACK);
         tabela.setSelectionBackground(Color.GRAY);
         tabela.setModel(new DefaultTableModel(
                 new Object[][]{},
@@ -109,6 +131,38 @@ public class TelaConsultaFun extends JPanel {
                     "Nome", "CPF", "Usuário"
                 }
         ));
+        
+        //Alterando a largura das 
+        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        coluna1 = tabela.getColumnModel().getColumn(0);
+        coluna1.setPreferredWidth(200);
+        
+        coluna2 = tabela.getColumnModel().getColumn(1);
+        coluna2.setPreferredWidth(150);
+        
+        coluna3 = tabela.getColumnModel().getColumn(2);
+        coluna3.setPreferredWidth(150);
+        
+        //Centralizando o título das colunas
+        JTableHeader header = tabela.getTableHeader();
+        DefaultTableCellRenderer centralizado = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        //Adicionando dados na tabela
+        DefaultTableModel fun = (DefaultTableModel) tabela.getModel();
+
+        daoFuncionario = new DaoFuncionario();
+
+        for (Funcionario f : daoFuncionario.listaFuncionario()) {
+
+            fun.addRow(new Object[]{
+                f.getNome(),
+                f.getCpf(),
+                f.getUsuario()
+
+            });
+        }
 
         jspRolagem.setViewportView(tabela);
 
@@ -151,6 +205,20 @@ public class TelaConsultaFun extends JPanel {
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                daoFuncionario = new DaoFuncionario();
+
+                if (tabela.getSelectedRow() != -1) {
+                    funSelecionado = daoFuncionario.listaFuncionario().get(tabela.getSelectedRow());
+                    telaFun.preencherJtext();
+                                        
+                    setVisible(false);
+                    jf.add(telaFun);
+                    telaFun.setVisible(true);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nenhum departamento selecionado!");
+                }
 
             }
         });

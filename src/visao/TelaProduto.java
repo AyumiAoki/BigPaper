@@ -76,51 +76,51 @@ public class TelaProduto extends JPanel {
         btnProduto.setFocusable(false);
 
         btnMenu = new JButton(iconMenu);
-        btnMenu.setBounds(243, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
+        btnMenu.setBounds(230, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
         btnMenu.setBorderPainted(false);
         btnMenu.setFocusable(false);
 
         btnCadastrar = new JButton();
-        btnCadastrar.setBounds(311, 384, 100, 25);
+        btnCadastrar.setBounds(290, 383, 100, 25);
         btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setBorderPainted(false);
         btnCadastrar.setFocusable(false);
 
         btnConsultar = new JButton();
-        btnConsultar.setBounds(425, 384, 100, 25);
+        btnConsultar.setBounds(404, 383, 100, 25);
         btnConsultar.setContentAreaFilled(false);
         btnConsultar.setBorderPainted(false);
         btnConsultar.setFocusable(false);
 
         btnAlterar = new JButton();
-        btnAlterar.setBounds(539, 384, 100, 25);
+        btnAlterar.setBounds(518, 383, 100, 25);
         btnAlterar.setContentAreaFilled(false);
         btnAlterar.setBorderPainted(false);
         btnAlterar.setFocusable(false);
 
         btnExcluir = new JButton();
-        btnExcluir.setBounds(653, 384, 100, 25);
+        btnExcluir.setBounds(632, 383, 100, 25);
         btnExcluir.setContentAreaFilled(false);
         btnExcluir.setBorderPainted(false);
         btnExcluir.setFocusable(false);
 
         btnSalvar = new JButton(iconInativo);
-        btnSalvar.setBounds(367, 415, 100, 25);
+        btnSalvar.setBounds(346, 414, 100, 25);
         btnSalvar.setContentAreaFilled(false);
         btnSalvar.setBorderPainted(false);
         btnSalvar.setFocusable(false);
         btnSalvar.setEnabled(false);
 
         btnLimpar = new JButton(iconInativo);
-        btnLimpar.setBounds(478, 415, 100, 25);
+        btnLimpar.setBounds(457, 414, 100, 25);
         btnLimpar.setContentAreaFilled(false);
         btnLimpar.setBorderPainted(false);
         btnLimpar.setFocusable(false);
         btnLimpar.setEnabled(false);
 
         btnCancelar = new JButton(iconInativo);
-        btnCancelar.setBounds(589, 415, 100, 25);
+        btnCancelar.setBounds(568, 414, 100, 25);
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setFocusable(false);
@@ -134,35 +134,35 @@ public class TelaProduto extends JPanel {
 
         //Inicialização dos JTextFields
         txtCodigo = new JTextField();
-        txtCodigo.setBounds(412, 216, 165, 20);
+        txtCodigo.setBounds(390, 216, 165, 20);
         txtCodigo.setBorder(new LineBorder(Color.BLACK, 2));
         txtCodigo.setFont(new Font("", Font.PLAIN, 12));
         txtCodigo.setCaretColor(Color.RED);
         txtCodigo.setEditable(true);
         
         txtNome = new JTextField();
-        txtNome.setBounds(638, 216, 144, 20);
+        txtNome.setBounds(616, 216, 144, 20);
         txtNome.setBorder(new LineBorder(Color.BLACK, 2));
         txtNome.setFont(new Font("", Font.PLAIN, 12));
         txtNome.setCaretColor(Color.red);
         txtNome.setEditable(true);
 
         txtDescricao = new JTextField();
-        txtDescricao.setBounds(412, 256, 370, 20);
+        txtDescricao.setBounds(390, 256, 370, 20);
         txtDescricao.setBorder(new LineBorder(Color.BLACK, 2));
         txtDescricao.setFont(new Font("", Font.PLAIN, 12));
         txtDescricao.setCaretColor(Color.red);
         txtDescricao.setEditable(true);
         
         txtMLucro = new JTextField();
-        txtMLucro.setBounds(412, 341, 158, 20);
+        txtMLucro.setBounds(390, 341, 158, 20);
         txtMLucro.setBorder(new LineBorder(Color.BLACK, 2));
         txtMLucro.setFont(new Font("", Font.PLAIN, 12));
         txtMLucro.setCaretColor(Color.red);
         txtMLucro.setEditable(true);
 
         txtMedida = new JTextField();
-        txtMedida.setBounds(638, 341, 146, 20);
+        txtMedida.setBounds(616, 341, 146, 20);
         txtMedida.setBorder(new LineBorder(Color.BLACK, 2));
         txtMedida.setFont(new Font("", Font.PLAIN, 12));
         txtMedida.setCaretColor(Color.red);
@@ -177,7 +177,7 @@ public class TelaProduto extends JPanel {
         //Inicialização dos JComboBox
         jcbFornecedor = new JComboBox();
         jcbFornecedor.addItem("");
-        jcbFornecedor.setBounds(412, 296, 165, 20);
+        jcbFornecedor.setBounds(390, 296, 165, 20);
         jcbFornecedor.setBorder(new LineBorder(Color.BLACK, 2));
         jcbFornecedor.setFont(new Font("", Font.PLAIN, 12));
         jcbFornecedor.setBackground(Color.WHITE);
@@ -194,7 +194,7 @@ public class TelaProduto extends JPanel {
         
         jcbMarca = new JComboBox();
         jcbMarca.addItem("");
-        jcbMarca.setBounds(638, 296, 146, 20);
+        jcbMarca.setBounds(616, 296, 146, 20);
         jcbMarca.setBorder(new LineBorder(Color.BLACK, 2));
         jcbMarca.setFont(new Font("", Font.PLAIN, 12));
         jcbMarca.setBackground(Color.WHITE);

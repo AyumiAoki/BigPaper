@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import modelo.DaoFuncionario;
 import modelo.Funcionario;
 
@@ -52,6 +55,7 @@ public class TelaFuncionario extends JPanel {
     private int selecionado;
     private String nome;
     private String cpf;
+    private String cpfAux;
     private String usuario;
     private String senha;
     private String confSenha;
@@ -59,22 +63,31 @@ public class TelaFuncionario extends JPanel {
     private DaoFuncionario daoFun;
     private Funcionario funcionario;
 
+    private TelaConsultaFun telaConsulta;
+    private TelaFuncionario telaFun;
+    private ValidaCPF validarCpf;
+
     public TelaFuncionario(final BigPaper jf) {
 
         this.jf = jf;
+        telaFun = this;
+        validarCpf = new ValidaCPF();
 
         setLayout(null);
 
         selecionado = 0;
         nome = "";
         cpf = "";
+        cpfAux = "";
         usuario = "";
         senha = "";
         confSenha = "";
-        
+
+        telaConsulta = new TelaConsultaFun(jf, this);
+
         daoFun = new DaoFuncionario();
         funcionario = new Funcionario();
-        
+
         fundo = new ImageIcon("src/imagens/fundoTelas/fundoFuncionario.png");
         iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
         iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
@@ -90,51 +103,53 @@ public class TelaFuncionario extends JPanel {
         btnFuncionario.setFocusable(false);
 
         btnMenu = new JButton(iconMenu);
-        btnMenu.setBounds(243, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
+        btnMenu.setBounds(230, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
         btnMenu.setBorderPainted(false);
         btnMenu.setFocusable(false);
 
         btnCadastrar = new JButton();
-        btnCadastrar.setBounds(311, 384, 100, 25);
+        btnCadastrar.setBounds(290, 383, 100, 25);
         btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setBorderPainted(false);
         btnCadastrar.setFocusable(false);
 
+        qntdFuncionarios();
+
         btnConsultar = new JButton();
-        btnConsultar.setBounds(425, 384, 100, 25);
+        btnConsultar.setBounds(404, 383, 100, 25);
         btnConsultar.setContentAreaFilled(false);
         btnConsultar.setBorderPainted(false);
         btnConsultar.setFocusable(false);
 
         btnAlterar = new JButton();
-        btnAlterar.setBounds(539, 384, 100, 25);
+        btnAlterar.setBounds(518, 383, 100, 25);
         btnAlterar.setContentAreaFilled(false);
         btnAlterar.setBorderPainted(false);
         btnAlterar.setFocusable(false);
 
         btnExcluir = new JButton();
-        btnExcluir.setBounds(653, 384, 100, 25);
+        btnExcluir.setBounds(632, 383, 100, 25);
         btnExcluir.setContentAreaFilled(false);
         btnExcluir.setBorderPainted(false);
         btnExcluir.setFocusable(false);
 
         btnSalvar = new JButton(iconInativo);
-        btnSalvar.setBounds(367, 415, 100, 25);
+        btnSalvar.setBounds(346, 414, 100, 25);
         btnSalvar.setContentAreaFilled(false);
         btnSalvar.setBorderPainted(false);
         btnSalvar.setFocusable(false);
         btnSalvar.setEnabled(false);
 
         btnLimpar = new JButton(iconInativo);
-        btnLimpar.setBounds(478, 415, 100, 25);
+        btnLimpar.setBounds(457, 414, 100, 25);
         btnLimpar.setContentAreaFilled(false);
         btnLimpar.setBorderPainted(false);
         btnLimpar.setFocusable(false);
         btnLimpar.setEnabled(false);
 
         btnCancelar = new JButton(iconInativo);
-        btnCancelar.setBounds(589, 415, 100, 25);
+        btnCancelar.setBounds(568, 414, 100, 25);
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setFocusable(false);
@@ -154,35 +169,47 @@ public class TelaFuncionario extends JPanel {
 
         //Inicialização dos JTextFields
         txtNome = new JTextField();
-        txtNome.setBounds(445, 218, 250, 20);
+        txtNome.setBounds(440, 218, 250, 20);
         txtNome.setBorder(new LineBorder(Color.GRAY, 2));
         txtNome.setFont(new Font("", Font.PLAIN, 12));
         txtNome.setCaretColor(Color.red);
         txtNome.setEditable(false);
 
         txtCPF = new JTextField();
-        txtCPF.setBounds(445, 248, 250, 20);
+        txtCPF.setBounds(440, 248, 250, 20);
         txtCPF.setBorder(new LineBorder(Color.GRAY, 2));
         txtCPF.setFont(new Font("", Font.PLAIN, 12));
         txtCPF.setCaretColor(Color.red);
         txtCPF.setEditable(false);
+        
+        txtCPF.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                
+                validarCpf.imprimeCPF(txtCPF.getText());
+            }
+        });
 
         txtUsuario = new JTextField();
-        txtUsuario.setBounds(445, 278, 250, 20);
+        txtUsuario.setBounds(440, 278, 250, 20);
         txtUsuario.setBorder(new LineBorder(Color.GRAY, 2));
         txtUsuario.setFont(new Font("", Font.PLAIN, 12));
         txtUsuario.setCaretColor(Color.red);
         txtUsuario.setEditable(false);
 
         txtSenha = new JPasswordField();
-        txtSenha.setBounds(445, 308, 250, 20);
+        txtSenha.setBounds(440, 308, 250, 20);
         txtSenha.setBorder(new LineBorder(Color.GRAY, 2));
         txtSenha.setFont(new Font("", Font.PLAIN, 12));
         txtSenha.setCaretColor(Color.red);
         txtSenha.setEditable(false);
 
         txtConfSenha = new JPasswordField();
-        txtConfSenha.setBounds(445, 338, 250, 20);
+        txtConfSenha.setBounds(440, 338, 250, 20);
         txtConfSenha.setBorder(new LineBorder(Color.GRAY, 2));
         txtConfSenha.setFont(new Font("", Font.PLAIN, 12));
         txtConfSenha.setCaretColor(Color.red);
@@ -225,9 +252,7 @@ public class TelaFuncionario extends JPanel {
 
                 btnMenu.setEnabled(false);
                 btnFechar.setEnabled(false);
-
-                txtNome.requestFocus();
-
+                
                 camposAtivados();
                 botoesDesativados();
 
@@ -249,24 +274,31 @@ public class TelaFuncionario extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 btnConsultar.setIcon(null);
-                btnConsultar.setEnabled(false);
+                btnConsultar.setEnabled(true);
 
-                camposAtivados();
-                botoesDesativados();
+                btnSalvar.setIcon(iconInativo);
+                btnSalvar.setEnabled(false);
+
+                btnLimpar.setIcon(iconInativo);
+                btnLimpar.setEnabled(false);
+
+                btnCancelar.setIcon(null);
+                btnCancelar.setEnabled(true);
 
                 btnCadastrar.setIcon(iconInativo);
                 btnCadastrar.setEnabled(false);
 
-                btnAlterar.setIcon(iconInativo);
-                btnAlterar.setEnabled(false);
+                btnAlterar.setIcon(null);
+                btnAlterar.setEnabled(true);
 
-                btnExcluir.setIcon(iconInativo);
-                btnExcluir.setEnabled(false);
+                btnExcluir.setIcon(null);
+                btnExcluir.setEnabled(true);
 
-                TelaConsultaFun telaConsultaFun = new TelaConsultaFun(jf);
+                telaConsulta = new TelaConsultaFun(jf, telaFun);
                 setVisible(false);
-                jf.add(telaConsultaFun);
-                telaConsultaFun.requestFocus();
+                jf.add(telaConsulta);
+                telaConsulta.setVisible(true);
+                telaConsulta.requestFocus();
 
             }
         });
@@ -275,20 +307,13 @@ public class TelaFuncionario extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                btnAlterar.setIcon(null);
-                btnAlterar.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Selecione o funcionário que deseja alterar");
 
-                camposAtivados();
-                botoesDesativados();
-
-                btnCadastrar.setIcon(iconInativo);
-                btnCadastrar.setEnabled(false);
-
-                btnConsultar.setIcon(iconInativo);
-                btnConsultar.setEnabled(false);
-
-                btnExcluir.setIcon(iconInativo);
-                btnExcluir.setEnabled(false);
+                telaConsulta = new TelaConsultaFun(jf, telaFun);
+                setVisible(false);
+                jf.add(telaConsulta);
+                telaConsulta.setVisible(true);
+                telaConsulta.requestFocus();
 
                 selecionado = 2;
             }
@@ -298,20 +323,13 @@ public class TelaFuncionario extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                btnExcluir.setIcon(null);
-                btnExcluir.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Selecione o funcionário que deseja excluir");
 
-                camposAtivados();
-                botoesDesativados();
-
-                btnCadastrar.setIcon(iconInativo);
-                btnCadastrar.setEnabled(false);
-
-                btnConsultar.setIcon(iconInativo);
-                btnConsultar.setEnabled(false);
-
-                btnAlterar.setIcon(iconInativo);
-                btnAlterar.setEnabled(false);
+                telaConsulta = new TelaConsultaFun(jf, telaFun);
+                setVisible(false);
+                jf.add(telaConsulta);
+                telaConsulta.setVisible(true);
+                telaConsulta.requestFocus();
 
                 selecionado = 3;
             }
@@ -335,25 +353,85 @@ public class TelaFuncionario extends JPanel {
                     daoFun = new DaoFuncionario();
 
                     if (senha.equals(confSenha)) {
-                        int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente salvar os dados?", "Salvar", JOptionPane.YES_NO_OPTION);
 
-                        if (resposta == JOptionPane.YES_OPTION) {
+                        if (validarCpf.isCPF(cpf)) {
+                            
+                            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente inserir este funcionário?", "Inserir", JOptionPane.YES_NO_OPTION);
 
-                            if (daoFun.inserirFun(funcionario)) {
-                                JOptionPane.showMessageDialog(null, "Sucesso de operação");
-                                camposDesativados();
-                                botoesAtivados();
-                                btnMenu.setEnabled(true);
-                                btnFechar.setEnabled(true);
-                                requestFocus();
+                            if (resposta == JOptionPane.YES_OPTION) {
 
+                                if (daoFun.inserirFuncionario(funcionario)) {
+                                    JOptionPane.showMessageDialog(null, "Sucesso de operação");
+                                    camposDesativados();
+                                    botoesAtivados();
+                                    btnMenu.setEnabled(true);
+                                    btnFechar.setEnabled(true);
+                                    requestFocus();
+
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Erro ao Inserir Funcionário\n ");
+                                }
                             } else {
-                                JOptionPane.showMessageDialog(null, "Erro ao Inserir Funcionário\n ");
                             }
                         } else {
+                            JOptionPane.showMessageDialog(null, "CPF inválido!");
+                            txtCPF.requestFocus();
                         }
+
                     } else {
                         JOptionPane.showMessageDialog(null, "As senhas não coincidem!");
+                    }
+                } else if (selecionado == 2) {
+
+                    nome = txtNome.getText();
+                    cpf = txtCPF.getText();
+                    usuario = txtUsuario.getText();
+                    senha = new String(txtSenha.getPassword());
+                    confSenha = new String(txtConfSenha.getPassword());
+
+                    funcionario = new Funcionario(nome, cpf, usuario, senha);
+
+                    daoFun = new DaoFuncionario();
+
+                    int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente atualizar os dados deste funcionário?", "Atualizar", JOptionPane.YES_NO_OPTION);
+
+                    if (resposta == JOptionPane.YES_OPTION) {
+
+                        if (daoFun.atualizarFuncionario(funcionario, cpfAux)) {
+                            JOptionPane.showMessageDialog(null, "Sucesso de operação");
+                            camposDesativados();
+                            botoesAtivados();
+                            btnMenu.setEnabled(true);
+                            btnFechar.setEnabled(true);
+                            requestFocus();
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Erro ao atualizar funcionário\n ");
+                        }
+                    } else {
+                    }
+                } else {
+
+                    funcionario = new Funcionario(cpfAux);
+
+                    daoFun = new DaoFuncionario();
+
+                    int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este funcionário?", "Excluir", JOptionPane.YES_NO_OPTION);
+
+                    if (resposta == JOptionPane.YES_OPTION) {
+
+                        if (daoFun.excluirFuncionario(funcionario)) {
+                            JOptionPane.showMessageDialog(null, "Sucesso de operação");
+                            camposDesativados();
+                            botoesAtivados();
+                            btnMenu.setEnabled(true);
+                            btnFechar.setEnabled(true);
+                            requestFocus();
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Erro ao excluir funcionário\n ");
+                        }
+                    } else {
                     }
                 }
             }
@@ -445,39 +523,39 @@ public class TelaFuncionario extends JPanel {
     public void camposDesativados() {
 
         txtNome.setBorder(new LineBorder(Color.GRAY, 2));
-        txtNome.setEditable(true);
+        txtNome.setEditable(false);
         txtNome.setText("");
 
         txtCPF.setBorder(new LineBorder(Color.GRAY, 2));
-        txtCPF.setEditable(true);
+        txtCPF.setEditable(false);
         txtCPF.setText("");
 
         txtUsuario.setBorder(new LineBorder(Color.GRAY, 2));
-        txtUsuario.setEditable(true);
+        txtUsuario.setEditable(false);
         txtUsuario.setText("");
 
         txtSenha.setBorder(new LineBorder(Color.GRAY, 2));
-        txtSenha.setEditable(true);
+        txtSenha.setEditable(false);
         txtSenha.setText("");
 
         txtConfSenha.setBorder(new LineBorder(Color.GRAY, 2));
-        txtConfSenha.setEditable(true);
+        txtConfSenha.setEditable(false);
         txtConfSenha.setText("");
     }
 
     public void botoesAtivados() {
 
-        btnCadastrar.setEnabled(true);
         btnCadastrar.setIcon(null);
+        btnCadastrar.setEnabled(true);
 
-        btnConsultar.setEnabled(true);
         btnConsultar.setIcon(null);
+        btnConsultar.setEnabled(true);
 
-        btnAlterar.setEnabled(true);
         btnAlterar.setIcon(null);
+        btnAlterar.setEnabled(true);
 
-        btnExcluir.setEnabled(true);
         btnExcluir.setIcon(null);
+        btnExcluir.setEnabled(true);
 
         btnSalvar.setIcon(iconInativo);
         btnSalvar.setEnabled(false);
@@ -499,6 +577,79 @@ public class TelaFuncionario extends JPanel {
 
         btnCancelar.setEnabled(true);
         btnCancelar.setIcon(null);
+
+    }
+
+    public void qntdFuncionarios() {
+
+        daoFun = new DaoFuncionario();
+
+        daoFun.listaFuncionario();
+
+        if (daoFun.i == 3) {
+            btnCadastrar.setIcon(iconInativo);
+            btnCadastrar.setEnabled(false);
+        } 
+    }
+
+    public void preencherJtext() {
+
+        camposDesativados();
+
+        txtNome.setText(telaConsulta.funSelecionado.getNome());
+        txtCPF.setText(telaConsulta.funSelecionado.getCpf());
+        txtUsuario.setText(telaConsulta.funSelecionado.getUsuario());
+
+        cpfAux = telaConsulta.funSelecionado.getCpf();
+
+        if (selecionado == 2) {
+
+            btnAlterar.setIcon(null);
+            btnAlterar.setEnabled(false);
+
+            txtNome.setEditable(true);
+            txtCPF.setEditable(true);
+            txtUsuario.setEditable(true);
+
+            txtNome.setBorder(new LineBorder(Color.BLACK, 2));
+            txtCPF.setBorder(new LineBorder(Color.BLACK, 2));
+            txtUsuario.setBorder(new LineBorder(Color.BLACK, 2));
+
+            botoesDesativados();
+
+            btnCadastrar.setIcon(iconInativo);
+            btnCadastrar.setEnabled(false);
+
+            btnConsultar.setIcon(iconInativo);
+            btnConsultar.setEnabled(false);
+
+            btnExcluir.setIcon(iconInativo);
+            btnExcluir.setEnabled(false);
+
+        } else if (selecionado == 3) {
+
+            btnExcluir.setIcon(null);
+            btnExcluir.setEnabled(false);
+
+            txtNome.setEditable(false);
+            txtCPF.setEditable(false);
+            txtUsuario.setEditable(false);
+
+            txtNome.setBorder(new LineBorder(Color.GRAY, 2));
+            txtCPF.setBorder(new LineBorder(Color.GRAY, 2));
+            txtUsuario.setBorder(new LineBorder(Color.GRAY, 2));
+
+            botoesDesativados();
+
+            btnCadastrar.setIcon(iconInativo);
+            btnCadastrar.setEnabled(false);
+
+            btnConsultar.setIcon(iconInativo);
+            btnConsultar.setEnabled(false);
+
+            btnAlterar.setIcon(iconInativo);
+            btnAlterar.setEnabled(false);
+        }
 
     }
 

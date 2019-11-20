@@ -155,35 +155,51 @@ public class TelaLogin extends JPanel {
 
                 if (op != 0) {
                     if (!nome.equals("") && !senha.equals("")) {
-                        if (op == 1) {
+                        if (!nome.equals("Usuário") && !senha.equals("Senha")) {
+                            if (op == 1) {
 
-                            TelaMenuFun telaFun = new TelaMenuFun(jf);
-                            setVisible(false);
-                            jf.add(telaFun);
-                            telaFun.requestFocus();
+                                daoFun = new DaoFuncionario();
 
-                        } else {
-                            if (nome.equals("admin")) {
-                                if (senha.equals("123")) {
+                                if (daoFun.buscarFuncionario(nome, senha)) {
 
-                                    TelaMenuAdm telaAdm = new TelaMenuAdm(jf);
+                                    TelaMenuFun telaFun = new TelaMenuFun(jf);
                                     setVisible(false);
-                                    jf.add(telaAdm);
-                                    telaAdm.requestFocus();
+                                    jf.add(telaFun);
+                                    telaFun.requestFocus();
                                 } else {
-                                    
-                                    JOptionPane.showMessageDialog(null, "Senha inválida!");
+
+                                    JOptionPane.showMessageDialog(null, "Senha ou login inválido!");
+                                    txtLogin.setText("");
                                     txtSenha.setText("");
-                                    txtSenha.requestFocus();
+                                    txtLogin.requestFocus();
                                 }
 
                             } else {
-                                
-                                JOptionPane.showMessageDialog(null, "Login inválido!");
-                                txtLogin.setText("");
-                                txtLogin.requestFocus();
+                                if (nome.equals("admin")) {
+                                    if (senha.equals("123")) {
+
+                                        TelaMenuAdm telaAdm = new TelaMenuAdm(jf);
+                                        setVisible(false);
+                                        jf.add(telaAdm);
+                                        telaAdm.requestFocus();
+                                    } else {
+
+                                        JOptionPane.showMessageDialog(null, "Senha inválida!");
+                                        txtSenha.setText("");
+                                        txtSenha.requestFocus();
+                                    }
+
+                                } else {
+
+                                    JOptionPane.showMessageDialog(null, "Login inválido!");
+                                    txtLogin.setText("");
+                                    txtLogin.requestFocus();
+                                }
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                         }
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                     }
