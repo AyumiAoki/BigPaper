@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,13 +27,19 @@ public class TelaRelEstoque extends JPanel{
     private JScrollPane jspRolagem;
     private JTable tabela;
     
-    private JButton btnRelEstoque;
     private JButton btnMenu;
     private JButton btnFechar;
     private JButton olaAdm;
     
+    private JLabel lblFuncionario;
+    private JLabel lblProduto;
+    private JLabel lblEntrada;
+    private JLabel lblSaida;
+    private JLabel lblRelVenda;
+    
     private final ImageIcon iconMenu; 
-    private final ImageIcon iconSelecionado; 
+    private final ImageIcon iconSelecionado;
+    private final ImageIcon iconSelecionado2; 
     private final ImageIcon fundo; 
     private final ImageIcon iconFechar;
     private final ImageIcon iconOla;  
@@ -46,17 +53,28 @@ public class TelaRelEstoque extends JPanel{
         //Inicialização das imagens
         fundo = new ImageIcon("src/imagens/fundoTelas/fundoRelEstoque.png");
         iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconSelecionado2 = new ImageIcon("src/imagens/iconBotoes/btnSelecionado2.png");
         iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
         iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
         iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
-
-        //Inicialização e configurações dos botões       
-        btnRelEstoque = new JButton(iconSelecionado);
-        btnRelEstoque.setBounds(0, 409, 167, 47);
-        btnRelEstoque.setContentAreaFilled(false);
-        btnRelEstoque.setBorderPainted(false);
-        btnRelEstoque.setFocusable(false);
         
+        //Inicialização das labels
+        lblFuncionario = new JLabel(iconSelecionado);
+        lblFuncionario.setBounds(0, 160, 167, 47);
+        
+        lblProduto = new JLabel(iconSelecionado2);
+        lblProduto.setBounds(0, 207, 167, 48);
+        
+        lblEntrada = new JLabel(iconSelecionado);
+        lblEntrada.setBounds(0, 285, 167, 47);
+        
+        lblSaida = new JLabel(iconSelecionado);
+        lblSaida.setBounds(0, 332, 167, 47);
+        
+        lblRelVenda = new JLabel(iconSelecionado);
+        lblRelVenda.setBounds(0, 456, 167, 47);
+
+        //Inicialização e configurações dos botões
         btnMenu = new JButton(iconMenu);
         btnMenu.setBounds(195, 81, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
@@ -102,10 +120,14 @@ public class TelaRelEstoque extends JPanel{
         jspRolagem.setViewportView(tabela);
         
         add(jspRolagem);
-        add(btnRelEstoque);
         add(btnMenu);
         add(btnFechar);
         add(olaAdm);
+        add(lblFuncionario);
+        add(lblProduto);
+        add(lblEntrada);
+        add(lblSaida);
+        add(lblRelVenda);
         
         btnMenu.addActionListener(new ActionListener() {
             @Override

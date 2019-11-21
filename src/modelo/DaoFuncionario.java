@@ -77,7 +77,6 @@ public class DaoFuncionario {
             
             ConnectionFactory.CloseConnection(con, stmt, rs);
         }
-        System.out.println(i);
         return fun;    
     }
     
@@ -90,10 +89,13 @@ public class DaoFuncionario {
         boolean encontrou = false;
                 
         try {
+            System.out.println("1");
             stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
             stmt.setString(2, senha);
+            System.out.println("2");
             rs = stmt.executeQuery();
+            System.out.println("3");
             
             while(rs.next()){
                 encontrou = true;
