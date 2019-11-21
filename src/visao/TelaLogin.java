@@ -159,21 +159,36 @@ public class TelaLogin extends JPanel {
                             if (op == 1) {
 
                                 daoFun = new DaoFuncionario();
+                                
+                                daoFun.listaFuncionario();
+                                
+                                if (daoFun.i != 0) {
+                                    
+                                    daoFun = new DaoFuncionario();
 
-                                if (daoFun.buscarFuncionario(nome, senha)) {
+                                    if (daoFun.buscarFuncionario(nome, senha)) {
 
-                                    TelaMenuFun telaFun = new TelaMenuFun(jf);
-                                    setVisible(false);
-                                    jf.add(telaFun);
-                                    telaFun.requestFocus();
-                                } else {
+                                        TelaMenuFun telaFun = new TelaMenuFun(jf);
+                                        setVisible(false);
+                                        jf.add(telaFun);
+                                        telaFun.requestFocus();
+                                        
+                                    } else {
 
-                                    JOptionPane.showMessageDialog(null, "Senha ou login inválido!");
-                                    txtLogin.setText("");
-                                    txtSenha.setText("");
-                                    txtLogin.requestFocus();
+                                        JOptionPane.showMessageDialog(null, "Senha ou login inválido!");
+                                        txtLogin.setText("");
+                                        txtSenha.setText("");
+                                        txtLogin.requestFocus();
+                                        
+                                    }
+                                } else{
+                                    JOptionPane.showMessageDialog(null, "Nenhum funcionário foi cadastrado!");
+                                    txtLogin.setText("Usuário");
+                                    txtSenha.setText("Senha");
+                                    txtSenha.setEchoChar((char) 0);
+                                    btnFuncionario.setIcon(null);
+                                    requestFocus();
                                 }
-
                             } else {
                                 if (nome.equals("admin")) {
                                     if (senha.equals("123")) {

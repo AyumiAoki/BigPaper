@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,16 +30,22 @@ public class TelaEntradaProd extends JPanel {
 
     private final ImageIcon fundo;
     private final ImageIcon iconSelecionado;
+    private final ImageIcon iconSelecionado2;
     private ImageIcon iconMenu;
     private ImageIcon iconFechar;
     private final ImageIcon iconOla; 
 
-    private JButton btnEntradaProd;
     private JButton btnMenu;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JButton btnFechar;
     private JButton olaAdm;
+    
+    private JLabel lblFuncionario;
+    private JLabel lblProduto;
+    private JLabel lblSaida;
+    private JLabel lblRelEstoque;
+    private JLabel lblRelVenda;
 
     private JComboBox jcbNome;
     
@@ -60,17 +67,28 @@ public class TelaEntradaProd extends JPanel {
 
         fundo = new ImageIcon("src/imagens/fundoTelas/fundoEntradaProd.png");
         iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconSelecionado2 = new ImageIcon("src/imagens/iconBotoes/btnSelecionado2.png");
         iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
         iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
         iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
+        
+        //Inicialização das labels
+        lblFuncionario = new JLabel(iconSelecionado);
+        lblFuncionario.setBounds(0, 160, 167, 47);
+        
+        lblProduto = new JLabel(iconSelecionado2);
+        lblProduto.setBounds(0, 207, 167, 48);
+        
+        lblSaida = new JLabel(iconSelecionado);
+        lblSaida.setBounds(0, 332, 167, 47);
+        
+        lblRelEstoque = new JLabel(iconSelecionado);
+        lblRelEstoque.setBounds(0, 409, 167, 47);
+        
+        lblRelVenda = new JLabel(iconSelecionado);
+        lblRelVenda.setBounds(0, 456, 167, 47);
 
-        //Inicialização e configurações dos botões       
-        btnEntradaProd = new JButton(iconSelecionado);
-        btnEntradaProd.setBounds(0, 285, 167, 47);
-        btnEntradaProd.setContentAreaFilled(false);
-        btnEntradaProd.setBorderPainted(false);
-        btnEntradaProd.setFocusable(false);
-
+        //Inicialização e configurações dos botões
         btnMenu = new JButton(iconMenu);
         btnMenu.setBounds(195, 84, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
@@ -182,7 +200,6 @@ public class TelaEntradaProd extends JPanel {
         jspRolagem.setViewportView(tabelaProd);
 
         // Adicionando os botões ao painel
-        add(btnEntradaProd);
         add(btnMenu);
         add(btnConfirmar);
         add(btnCancelar);
@@ -195,6 +212,11 @@ public class TelaEntradaProd extends JPanel {
         add(txtTotalGerado);
         add(btnFechar);
         add(olaAdm);
+        add(lblFuncionario);
+        add(lblProduto);
+        add(lblSaida);
+        add(lblRelEstoque);
+        add(lblRelVenda);
 
         btnMenu.addActionListener(new ActionListener() {
             @Override

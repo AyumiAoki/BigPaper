@@ -10,6 +10,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -34,7 +35,6 @@ public class TelaFuncionario extends JPanel {
     private ImageIcon iconFechar;
     private final ImageIcon iconOla;
 
-    private JButton btnFuncionario;
     private JButton btnMenu;
     private JButton btnCadastrar;
     private JButton btnAlterar;
@@ -51,6 +51,12 @@ public class TelaFuncionario extends JPanel {
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
     private JPasswordField txtConfSenha;
+    
+    private JLabel lblProduto;
+    private JLabel lblEntrada;
+    private JLabel lblSaida;
+    private JLabel lblRelEstoque;
+    private JLabel lblRelVenda;
 
     private int selecionado;
     private String nome;
@@ -66,6 +72,7 @@ public class TelaFuncionario extends JPanel {
     private TelaConsultaFun telaConsulta;
     private TelaFuncionario telaFun;
     private ValidaCPF validarCpf;
+    
 
     public TelaFuncionario(final BigPaper jf) {
 
@@ -94,14 +101,24 @@ public class TelaFuncionario extends JPanel {
         iconInativo = new ImageIcon("src/imagens/iconBotoes/btnInativo.png");
         iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
         iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
+        
+        //Inicialização das labels
+        lblProduto = new JLabel(iconSelecionado);
+        lblProduto.setBounds(0, 208, 167, 47);
+        
+        lblEntrada = new JLabel(iconSelecionado);
+        lblEntrada.setBounds(0, 285, 167, 47);
+        
+        lblSaida = new JLabel(iconSelecionado);
+        lblSaida.setBounds(0, 332, 167, 47);
+        
+        lblRelEstoque = new JLabel(iconSelecionado);
+        lblRelEstoque.setBounds(0, 409, 167, 47);
+        
+        lblRelVenda = new JLabel(iconSelecionado);
+        lblRelVenda.setBounds(0, 456, 167, 47);
 
-        //Inicialização e configurações dos botões       
-        btnFuncionario = new JButton(iconSelecionado);
-        btnFuncionario.setBounds(0, 160, 167, 47);
-        btnFuncionario.setContentAreaFilled(false);
-        btnFuncionario.setBorderPainted(false);
-        btnFuncionario.setFocusable(false);
-
+        //Inicialização e configurações dos botões
         btnMenu = new JButton(iconMenu);
         btnMenu.setBounds(230, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
@@ -216,7 +233,6 @@ public class TelaFuncionario extends JPanel {
         txtConfSenha.setEditable(false);
 
         // Adicionando os botões ao painel
-        add(btnFuncionario);
         add(btnMenu);
         add(btnCadastrar);
         add(btnConsultar);
@@ -232,6 +248,11 @@ public class TelaFuncionario extends JPanel {
         add(txtConfSenha);
         add(btnFechar);
         add(olaAdm);
+        add(lblProduto);
+        add(lblEntrada);
+        add(lblSaida);
+        add(lblRelEstoque);
+        add(lblRelVenda);
 
         btnMenu.addActionListener(new ActionListener() {
             @Override
@@ -247,7 +268,7 @@ public class TelaFuncionario extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                btnCadastrar.setIcon(null);
+                btnCadastrar.setIcon(iconInativo);
                 btnCadastrar.setEnabled(false);
 
                 btnMenu.setEnabled(false);
@@ -264,6 +285,8 @@ public class TelaFuncionario extends JPanel {
 
                 btnExcluir.setIcon(iconInativo);
                 btnExcluir.setEnabled(false);
+                
+                txtNome.requestFocus();
 
                 selecionado = 1;
             }

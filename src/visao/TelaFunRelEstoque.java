@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,9 +27,13 @@ public class TelaFunRelEstoque extends JPanel{
     private JScrollPane jspRolagem;
     private JTable tabela;
     
-    private JButton btnRelEstoque;
     private JButton btnMenu;
     private JButton btnFechar;
+    
+    private JLabel lblProduto;
+    private JLabel lblEntrada;
+    private JLabel lblSaida;
+    private JLabel lblRelVenda;
     
     private final ImageIcon iconMenu; 
     private final ImageIcon iconSelecionado; 
@@ -46,14 +51,21 @@ public class TelaFunRelEstoque extends JPanel{
         iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
         iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
         iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
-
-        //Inicialização e configurações dos botões       
-        btnRelEstoque = new JButton(iconSelecionado);
-        btnRelEstoque.setBounds(0, 361, 167, 47);
-        btnRelEstoque.setContentAreaFilled(false);
-        btnRelEstoque.setBorderPainted(false);
-        btnRelEstoque.setFocusable(false);
         
+        //Inicialização das labels
+        lblProduto = new JLabel(iconSelecionado);
+        lblProduto.setBounds(0, 160, 167, 47);
+        
+        lblEntrada = new JLabel(iconSelecionado);
+        lblEntrada.setBounds(0, 237, 167, 47);
+        
+        lblSaida = new JLabel(iconSelecionado);
+        lblSaida.setBounds(0, 284, 167, 47);
+        
+        lblRelVenda = new JLabel(iconSelecionado);
+        lblRelVenda.setBounds(0, 408, 167, 47);
+
+        //Inicialização e configurações dos botões 
         btnMenu = new JButton(iconMenu);
         btnMenu.setBounds(195, 90, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
@@ -93,9 +105,12 @@ public class TelaFunRelEstoque extends JPanel{
         jspRolagem.setViewportView(tabela);
         
         add(jspRolagem);
-        add(btnRelEstoque);
         add(btnMenu);
         add(btnFechar);
+        add(lblProduto);
+        add(lblEntrada);
+        add(lblRelVenda);
+        add(lblSaida);
         
         btnMenu.addActionListener(new ActionListener() {
             @Override

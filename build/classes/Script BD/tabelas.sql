@@ -13,8 +13,9 @@ Create table Funcionario (
 Create table Fornecedor (
     nome varchar(50) not null,
     cpf varchar(14) not null,
+    codigo int not null,
     telefone varchar(12) not null,
-    primary key (cpf)
+    primary key (cpf, codigo)
 );
 
 Create table Marca (
@@ -30,13 +31,11 @@ Create table Produto (
     descricao varchar(200) not null, 
     margemLucro float not null,
     medida varchar(10) not null,
-    cpfFornecedor varchar(14) not null,
+    codFornecedor int not null,
     codMarca int not null,
-    primary key (codigo),
-    foreign key (cpfFornecedor) references Fornecedor(cpf),
-    foreign key (codMarca) references Marca(codigo)
+    foreign key (codFornecedor) references Fornecedor(codigo),
+    foreign key (codMarca) references Marca(codigo),
+    primary key (codigo)
 );
-
-
 
 select * from Funcionario;

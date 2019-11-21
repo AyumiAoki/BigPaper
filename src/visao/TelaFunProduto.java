@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -30,7 +31,6 @@ public class TelaFunProduto extends JPanel {
     private ImageIcon iconInativo;
     private ImageIcon iconFechar;
 
-    private JButton btnProduto;
     private JButton btnMenu;
     private JButton btnCadastrar;
     private JButton btnAlterar;
@@ -40,6 +40,11 @@ public class TelaFunProduto extends JPanel {
     private JButton btnLimpar;
     private JButton btnCancelar;
     private JButton btnFechar;
+    
+    private JLabel lblEntrada;
+    private JLabel lblSaida;
+    private JLabel lblRelEstoque;
+    private JLabel lblRelVenda;
     
     private JTextField txtCodigo;
     private JTextField txtNome;
@@ -64,14 +69,21 @@ public class TelaFunProduto extends JPanel {
         iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
         iconInativo = new ImageIcon("src/imagens/iconBotoes/btnInativo.png");
         iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
+        
+        //Inicialização das labels
+        lblEntrada = new JLabel(iconSelecionado);
+        lblEntrada.setBounds(0, 237, 167, 47);
+        
+        lblSaida = new JLabel(iconSelecionado);
+        lblSaida.setBounds(0, 284, 167, 47);
+        
+        lblRelEstoque = new JLabel(iconSelecionado);
+        lblRelEstoque.setBounds(0, 361, 167, 47);
+        
+        lblRelVenda = new JLabel(iconSelecionado);
+        lblRelVenda.setBounds(0, 408, 167, 47);
 
-        //Inicialização e configurações dos botões       
-        btnProduto = new JButton(iconSelecionado);
-        btnProduto.setBounds(0, 160, 167, 47);
-        btnProduto.setContentAreaFilled(false);
-        btnProduto.setBorderPainted(false);
-        btnProduto.setFocusable(false);
-
+        //Inicialização e configurações dos botões
         btnMenu = new JButton(iconMenu);
         btnMenu.setBounds(230, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
@@ -214,7 +226,6 @@ public class TelaFunProduto extends JPanel {
 //        });
 
         // Adicionando os botões ao painel
-        add(btnProduto);
         add(btnMenu);
         add(btnCadastrar);
         add(btnConsultar);
@@ -231,6 +242,11 @@ public class TelaFunProduto extends JPanel {
         add(jcbFornecedor);
         add(jcbMarca);
         add(btnFechar);
+        add(lblEntrada);
+        add(lblSaida);
+        add(lblRelEstoque);
+        add(lblRelVenda);
+        
         
         btnMenu.addActionListener(new ActionListener() {
             @Override

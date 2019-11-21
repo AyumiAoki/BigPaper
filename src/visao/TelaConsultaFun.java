@@ -2,29 +2,21 @@ package visao;
 
 import controle.BigPaper;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import modelo.DaoFuncionario;
 import modelo.Funcionario;
 
@@ -235,6 +227,9 @@ public class TelaConsultaFun extends JPanel {
                     setVisible(false);
                     jf.add(telaFuncionario);
                     telaFuncionario.requestFocus();
+                    telaFun.camposDesativados();
+                    telaFun.botoesAtivados();
+                    
                 } else {
                 }
             }
