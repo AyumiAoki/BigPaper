@@ -29,6 +29,7 @@ public class TelaProduto extends JPanel {
     private ImageIcon iconMenu;
     private ImageIcon iconInativo;
     private ImageIcon iconFechar;
+    private final ImageIcon iconOla; 
 
     private JButton btnProduto;
     private JButton btnMenu;
@@ -40,6 +41,7 @@ public class TelaProduto extends JPanel {
     private JButton btnLimpar;
     private JButton btnCancelar;
     private JButton btnFechar;
+    private JButton olaAdm;
     
     private JTextField txtCodigo;
     private JTextField txtNome;
@@ -49,18 +51,22 @@ public class TelaProduto extends JPanel {
     
     private JComboBox jcbFornecedor;
     private JComboBox jcbMarca;
+    
+    private int selecionado;
 
     public TelaProduto(final BigPaper jf) {
 
         this.jf = jf;
 
         setLayout(null);
-
-        fundo = new ImageIcon("src/imagens/fundoProduto.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconMenu = new ImageIcon("src/imagens/iconMenu.png");
-        iconInativo = new ImageIcon("src/imagens/btnInativo.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        
+        selecionado = 0;
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoProduto.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
+        iconInativo = new ImageIcon("src/imagens/iconBotoes/btnInativo.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
+        iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
 
         //Inicialização e configurações dos botões       
         btnProduto = new JButton(iconSelecionado);
@@ -70,51 +76,51 @@ public class TelaProduto extends JPanel {
         btnProduto.setFocusable(false);
 
         btnMenu = new JButton(iconMenu);
-        btnMenu.setBounds(243, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
+        btnMenu.setBounds(230, 96, iconMenu.getIconWidth(), iconMenu.getIconHeight());
         btnMenu.setContentAreaFilled(false);
         btnMenu.setBorderPainted(false);
         btnMenu.setFocusable(false);
 
         btnCadastrar = new JButton();
-        btnCadastrar.setBounds(311, 384, 100, 25);
+        btnCadastrar.setBounds(290, 383, 100, 25);
         btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setBorderPainted(false);
         btnCadastrar.setFocusable(false);
 
         btnConsultar = new JButton();
-        btnConsultar.setBounds(425, 384, 100, 25);
+        btnConsultar.setBounds(404, 383, 100, 25);
         btnConsultar.setContentAreaFilled(false);
         btnConsultar.setBorderPainted(false);
         btnConsultar.setFocusable(false);
 
         btnAlterar = new JButton();
-        btnAlterar.setBounds(539, 384, 100, 25);
+        btnAlterar.setBounds(518, 383, 100, 25);
         btnAlterar.setContentAreaFilled(false);
         btnAlterar.setBorderPainted(false);
         btnAlterar.setFocusable(false);
 
         btnExcluir = new JButton();
-        btnExcluir.setBounds(653, 384, 100, 25);
+        btnExcluir.setBounds(632, 383, 100, 25);
         btnExcluir.setContentAreaFilled(false);
         btnExcluir.setBorderPainted(false);
         btnExcluir.setFocusable(false);
 
         btnSalvar = new JButton(iconInativo);
-        btnSalvar.setBounds(367, 415, 100, 25);
+        btnSalvar.setBounds(346, 414, 100, 25);
         btnSalvar.setContentAreaFilled(false);
         btnSalvar.setBorderPainted(false);
         btnSalvar.setFocusable(false);
         btnSalvar.setEnabled(false);
 
         btnLimpar = new JButton(iconInativo);
-        btnLimpar.setBounds(478, 415, 100, 25);
+        btnLimpar.setBounds(457, 414, 100, 25);
         btnLimpar.setContentAreaFilled(false);
         btnLimpar.setBorderPainted(false);
         btnLimpar.setFocusable(false);
         btnLimpar.setEnabled(false);
 
         btnCancelar = new JButton(iconInativo);
-        btnCancelar.setBounds(589, 415, 100, 25);
+        btnCancelar.setBounds(568, 414, 100, 25);
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setFocusable(false);
@@ -128,44 +134,50 @@ public class TelaProduto extends JPanel {
 
         //Inicialização dos JTextFields
         txtCodigo = new JTextField();
-        txtCodigo.setBounds(412, 216, 165, 20);
+        txtCodigo.setBounds(390, 216, 165, 20);
         txtCodigo.setBorder(new LineBorder(Color.BLACK, 2));
         txtCodigo.setFont(new Font("", Font.PLAIN, 12));
         txtCodigo.setCaretColor(Color.RED);
         txtCodigo.setEditable(true);
         
         txtNome = new JTextField();
-        txtNome.setBounds(638, 216, 144, 20);
+        txtNome.setBounds(616, 216, 144, 20);
         txtNome.setBorder(new LineBorder(Color.BLACK, 2));
         txtNome.setFont(new Font("", Font.PLAIN, 12));
         txtNome.setCaretColor(Color.red);
         txtNome.setEditable(true);
 
         txtDescricao = new JTextField();
-        txtDescricao.setBounds(412, 256, 370, 20);
+        txtDescricao.setBounds(390, 256, 370, 20);
         txtDescricao.setBorder(new LineBorder(Color.BLACK, 2));
         txtDescricao.setFont(new Font("", Font.PLAIN, 12));
         txtDescricao.setCaretColor(Color.red);
         txtDescricao.setEditable(true);
         
         txtMLucro = new JTextField();
-        txtMLucro.setBounds(412, 341, 158, 20);
+        txtMLucro.setBounds(390, 341, 158, 20);
         txtMLucro.setBorder(new LineBorder(Color.BLACK, 2));
         txtMLucro.setFont(new Font("", Font.PLAIN, 12));
         txtMLucro.setCaretColor(Color.red);
         txtMLucro.setEditable(true);
 
         txtMedida = new JTextField();
-        txtMedida.setBounds(638, 341, 146, 20);
+        txtMedida.setBounds(616, 341, 146, 20);
         txtMedida.setBorder(new LineBorder(Color.BLACK, 2));
         txtMedida.setFont(new Font("", Font.PLAIN, 12));
         txtMedida.setCaretColor(Color.red);
         txtMedida.setEditable(true);
         
+        olaAdm = new JButton(iconOla);
+        olaAdm.setBounds(0, 65, 167, 65);
+        olaAdm.setContentAreaFilled(false);
+        olaAdm.setBorderPainted(false);
+        olaAdm.setFocusable(false);
+        
         //Inicialização dos JComboBox
         jcbFornecedor = new JComboBox();
         jcbFornecedor.addItem("");
-        jcbFornecedor.setBounds(412, 296, 165, 20);
+        jcbFornecedor.setBounds(390, 296, 165, 20);
         jcbFornecedor.setBorder(new LineBorder(Color.BLACK, 2));
         jcbFornecedor.setFont(new Font("", Font.PLAIN, 12));
         jcbFornecedor.setBackground(Color.WHITE);
@@ -182,7 +194,7 @@ public class TelaProduto extends JPanel {
         
         jcbMarca = new JComboBox();
         jcbMarca.addItem("");
-        jcbMarca.setBounds(638, 296, 146, 20);
+        jcbMarca.setBounds(616, 296, 146, 20);
         jcbMarca.setBorder(new LineBorder(Color.BLACK, 2));
         jcbMarca.setFont(new Font("", Font.PLAIN, 12));
         jcbMarca.setBackground(Color.WHITE);
@@ -228,6 +240,7 @@ public class TelaProduto extends JPanel {
         add(jcbFornecedor);
         add(jcbMarca);
         add(btnFechar);
+        add(olaAdm);
         
         btnMenu.addActionListener(new ActionListener() {
             @Override
@@ -242,50 +255,99 @@ public class TelaProduto extends JPanel {
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 btnCadastrar.setIcon(null);
-                botoesAtivados();
+                btnCadastrar.setEnabled(false);
                 
+                btnMenu.setEnabled(false);
+                btnFechar.setEnabled(false);
+                
+                txtNome.requestFocus();
+
+                camposAtivados();
+                botoesDesativados();
+
                 btnConsultar.setIcon(iconInativo);
                 btnConsultar.setEnabled(false);
-                
+
                 btnAlterar.setIcon(iconInativo);
                 btnAlterar.setEnabled(false);
-                
+
                 btnExcluir.setIcon(iconInativo);
                 btnExcluir.setEnabled(false);
+
+                selecionado = 1;
             }
         });
-
+        
         btnConsultar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnConsultar.setIcon(null);
-                botoesAtivados();
+                btnConsultar.setEnabled(false);
+
+                camposAtivados();
+                botoesDesativados();
+
+                btnCadastrar.setIcon(iconInativo);
                 btnCadastrar.setEnabled(false);
+
+                btnAlterar.setIcon(iconInativo);
                 btnAlterar.setEnabled(false);
+
+                btnExcluir.setIcon(iconInativo);
                 btnExcluir.setEnabled(false);
+                
+                TelaConsultaProd telaConsultaProd = new TelaConsultaProd(jf);
+                setVisible(false);
+                jf.add(telaConsultaProd);
+                telaConsultaProd.requestFocus();
             }
         });
 
         btnAlterar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 btnAlterar.setIcon(null);
-                botoesAtivados();
+                btnAlterar.setEnabled(false);
+
+                camposAtivados();
+                botoesDesativados();
+
+                btnCadastrar.setIcon(iconInativo);
                 btnCadastrar.setEnabled(false);
+
+                btnConsultar.setIcon(iconInativo);
                 btnConsultar.setEnabled(false);
+
+                btnExcluir.setIcon(iconInativo);
                 btnExcluir.setEnabled(false);
+
+                selecionado = 2;
             }
         });
 
         btnExcluir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 btnExcluir.setIcon(null);
-                botoesAtivados();
+                btnExcluir.setEnabled(false);
+
+                camposAtivados();
+                botoesDesativados();
+
+                btnCadastrar.setIcon(iconInativo);
                 btnCadastrar.setEnabled(false);
+
+                btnConsultar.setIcon(iconInativo);
                 btnConsultar.setEnabled(false);
+
+                btnAlterar.setIcon(iconInativo);
                 btnAlterar.setEnabled(false);
+
+                selecionado = 3;
             }
         });
 
@@ -300,8 +362,21 @@ public class TelaProduto extends JPanel {
         btnLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnLimpar.setIcon(null);
-                botoesAtivados();
+
+                int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente limpar os campos?", "Limpar", JOptionPane.YES_NO_OPTION);
+
+                if (resposta == JOptionPane.YES_OPTION) {
+
+                    txtNome.setText("");
+                    txtCodigo.setText("");
+                    txtDescricao.setText("");
+                    txtMLucro.setText("");
+                    txtMLucro.setText("");
+
+                    txtNome.requestFocus();
+
+                } else {
+                }
             }
         });
 
@@ -309,34 +384,15 @@ public class TelaProduto extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                /* public ConfirmDialogInFrame() {
-        getContentPane().setBackground(Color.DARK_GRAY);
-        setTitle("Confirm Dialog in Frame");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        setResizable(false);
-        setSize(400, 300);
-        getContentPane().setLayout(null);
-    }
-
-    public static void main(String[] args){
-        ImageIcon icon = new ImageIcon("src/images/turtle64.png");
-        int input = JOptionPane.showConfirmDialog(new ConfirmDialogInFrame(), 
-                "I appear as part of the frame!!", "Customized Dialog", 
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-
-        // 0=ok, 2=cancel
-        System.out.println(input);
-    }*/
                 int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar está operação?", "Cancelar", JOptionPane.YES_NO_OPTION);
 
                 if (resposta == JOptionPane.YES_OPTION) {
 
-                    txtNome.setText("");
-                    txtDescricao.setText("");
-                    txtMLucro.setText("");
-                    txtMedida.setText("");
-                    botoesDesativados();
+                    camposDesativados();
+                    botoesAtivados();
+                    btnMenu.setEnabled(true);
+                    btnFechar.setEnabled(true);
+
                 } else {
                 }
             }
@@ -362,7 +418,78 @@ public class TelaProduto extends JPanel {
 
     }
 
+    public void camposAtivados() {
+
+        txtNome.setBorder(new LineBorder(Color.BLACK, 2));
+        txtNome.setEditable(true);
+        txtNome.setText("");
+
+        txtCodigo.setBorder(new LineBorder(Color.BLACK, 2));
+        txtCodigo.setEditable(true);
+        txtCodigo.setText("");
+
+        txtDescricao.setBorder(new LineBorder(Color.BLACK, 2));
+        txtDescricao.setEditable(true);
+        txtDescricao.setText("");
+
+        txtMLucro.setBorder(new LineBorder(Color.BLACK, 2));
+        txtMLucro.setEditable(true);
+        txtMLucro.setText("");
+
+        txtMedida.setBorder(new LineBorder(Color.BLACK, 2));
+        txtMedida.setEditable(true);
+        txtMedida.setText("");
+
+    }
+
+    public void camposDesativados() {
+
+        txtNome.setBorder(new LineBorder(Color.GRAY, 2));
+        txtNome.setEditable(false);
+        txtNome.setText("");
+
+        txtCodigo.setBorder(new LineBorder(Color.GRAY, 2));
+        txtCodigo.setEditable(false);
+        txtCodigo.setText("");
+
+        txtDescricao.setBorder(new LineBorder(Color.GRAY, 2));
+        txtDescricao.setEditable(false);
+        txtDescricao.setText("");
+
+        txtMLucro.setBorder(new LineBorder(Color.GRAY, 2));
+        txtMLucro.setEditable(false);
+        txtMLucro.setText("");
+
+        txtMedida.setBorder(new LineBorder(Color.GRAY, 2));
+        txtMedida.setEditable(false);
+        txtMedida.setText("");
+    }
+
     public void botoesAtivados() {
+
+        btnCadastrar.setEnabled(true);
+        btnCadastrar.setIcon(null);
+
+        btnConsultar.setEnabled(true);
+        btnConsultar.setIcon(null);
+
+        btnAlterar.setEnabled(true);
+        btnAlterar.setIcon(null);
+
+        btnExcluir.setEnabled(true);
+        btnExcluir.setIcon(null);
+
+        btnSalvar.setIcon(iconInativo);
+        btnSalvar.setEnabled(false);
+
+        btnLimpar.setIcon(iconInativo);
+        btnLimpar.setEnabled(false);
+
+        btnCancelar.setIcon(iconInativo);
+        btnCancelar.setEnabled(false);
+    }
+
+    public void botoesDesativados() {
 
         btnSalvar.setEnabled(true);
         btnSalvar.setIcon(null);
@@ -373,20 +500,6 @@ public class TelaProduto extends JPanel {
         btnCancelar.setEnabled(true);
         btnCancelar.setIcon(null);
 
-    }
-
-    public void botoesDesativados() {
-
-        btnSalvar.setIcon(iconInativo);
-        btnLimpar.setIcon(iconInativo);
-        btnCancelar.setIcon(iconInativo);
-
-        btnSalvar.setEnabled(false);
-        btnLimpar.setEnabled(false);
-        btnCancelar.setEnabled(false);
-        btnConsultar.setEnabled(true);
-        btnAlterar.setEnabled(true);
-        btnExcluir.setEnabled(true);
     }
 
     @Override

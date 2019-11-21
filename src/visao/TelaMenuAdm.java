@@ -15,6 +15,7 @@ import javax.swing.JPanel;
  *
  * @author Ayumi, Cecília, Fátima e Kallyne
  */
+
 public class TelaMenuAdm extends JPanel {
 
     private final BigPaper jf;
@@ -22,6 +23,7 @@ public class TelaMenuAdm extends JPanel {
     private final ImageIcon fundo;
     private ImageIcon iconSelecionado;
     private ImageIcon iconFechar;
+    private final ImageIcon iconOla; 
 
     private JButton btnFuncionario;
     private JButton btnProduto;
@@ -30,6 +32,7 @@ public class TelaMenuAdm extends JPanel {
     private JButton btnRelEstoque;
     private JButton btnRelVenda;
     private JButton btnFechar;
+    private JButton olaAdm;
 
     public TelaMenuAdm(final BigPaper jf) {
 
@@ -37,9 +40,10 @@ public class TelaMenuAdm extends JPanel {
 
         setLayout(null);
 
-        fundo = new ImageIcon("src/imagens/fundoMenuAdm.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoMenuAdm.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
+        iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
 
         //Inicialização e configurações dos botões       
         btnFuncionario = new JButton();
@@ -83,16 +87,22 @@ public class TelaMenuAdm extends JPanel {
         btnFechar.setContentAreaFilled(false);
         btnFechar.setBorderPainted(false);
         btnFechar.setFocusable(false);
+        
+        olaAdm = new JButton(iconOla);
+        olaAdm.setBounds(0, 65, 167, 65);
+        olaAdm.setContentAreaFilled(false);
+        olaAdm.setBorderPainted(false);
+        olaAdm.setFocusable(false);
 
         // Adicionando os botões ao painel
         add(btnFuncionario);
         add(btnProduto);
         add(btnEntrada);
         add(btnSaida);
-
         add(btnRelEstoque);
         add(btnRelVenda);
         add(btnFechar);
+        add(olaAdm);
 
         // Adicionando evento do mouse aos botões
         btnFuncionario.addMouseListener(new MouseListener() {
@@ -243,7 +253,7 @@ public class TelaMenuAdm extends JPanel {
         btnFuncionario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaCadFun telaFun = new TelaCadFun(jf);
+                TelaFuncionario telaFun = new TelaFuncionario(jf);
                 setVisible(false);
                 jf.add(telaFun);
                 telaFun.requestFocus();
@@ -277,6 +287,26 @@ public class TelaMenuAdm extends JPanel {
                 setVisible(false);
                 jf.add(telaSaida);
                 telaSaida.requestFocus();
+            }
+        });
+        
+        btnRelEstoque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaRelEstoque telaRelEstoque = new TelaRelEstoque(jf);
+                setVisible(false);
+                jf.add(telaRelEstoque);
+                telaRelEstoque.requestFocus();
+            }
+        });
+        
+        btnRelVenda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaRelVenda telaRelVenda = new TelaRelVenda(jf);
+                setVisible(false);
+                jf.add(telaRelVenda);
+                telaRelVenda.requestFocus();
             }
         });
 

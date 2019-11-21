@@ -24,7 +24,7 @@ public class DaoFuncionario {
         con = ConnectionFactory.getConnection();
     }
     
-    public boolean inserirFun(Funcionario fun){
+    public boolean inserirFuncionario(Funcionario fun){
         
         String sql = "insert into Funcionario VALUES (?,?,?,?)";
         
@@ -49,7 +49,7 @@ public class DaoFuncionario {
     }
     
     
-    public List<Funcionario> listaFun(){
+    public List<Funcionario> listaFuncionario(){
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -63,10 +63,10 @@ public class DaoFuncionario {
             
             while(rs.next()){
                 Funcionario funcionario = new Funcionario();
+                
                 funcionario.setNome(rs.getString("Nome"));
-                funcionario.setCpf(rs.getString("codigo"));
+                funcionario.setCpf(rs.getString("Cpf"));
                 funcionario.setUsuario(rs.getString("Usuario"));
-                funcionario.setSenha(rs.getString("Senha"));
                 fun.add(funcionario);
                 i++;
             }
@@ -74,9 +74,11 @@ public class DaoFuncionario {
         } catch (SQLException ex) {
             aux = false;
         }finally{
+            
             ConnectionFactory.CloseConnection(con, stmt, rs);
         }
-        return fun;       
+        System.out.println(i);
+        return fun;    
     }
     
     public boolean buscarFuncionario(String nome, String senha){
@@ -104,41 +106,20 @@ public class DaoFuncionario {
         return encontrou;       
     }
     
-    public boolean verificarSenha(String nome){
+    public boolean atualizarFuncionario(Funcionario f, String cpf){
         
-        String sql = "select senha from Funcionario where nome = ?";
-        
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        boolean encontrou = false;
-                
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
-            rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                encontrou = true;
-            }
-        } catch (SQLException ex) {
-        }finally{
-            ConnectionFactory.CloseConnection(con, stmt, rs);
-        }
-        
-        return encontrou;  
-    }
-    
-    public boolean atualizarFun(Funcionario f){
-        
-        String sql = "update Funcionario set senha = ? where cpf = ?";
+        String sql = "update Funcionario set nome = ?, cpf = ?, usuario = ? where cpf = ?";
         
         PreparedStatement stmt = null;
         try {
             
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, f.getSenha());
+            stmt.setString(1, f.getNome());
             stmt.setString(2, f.getCpf());
+            stmt.setString(3, f.getUsuario());
+            stmt.setString(4, cpf);
             stmt.executeUpdate();
+            
             return true;
                   
         } catch (SQLException ex) {
@@ -149,16 +130,15 @@ public class DaoFuncionario {
         }
     }
     
-    public boolean deleteFun(Funcionario f){
+    public boolean excluirFuncionario(Funcionario f){
         
-        String sql = "delete from Funcionario where nome = ? or cpf = ?";
+        String sql = "delete from Funcionario where cpf = ?";
         
         PreparedStatement stmt = null;
         try {
             
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, f.getNome());
-            stmt.setString(2, f.getCpf());
+            stmt.setString(1, f.getCpf());
             stmt.executeUpdate();
             return true;
             

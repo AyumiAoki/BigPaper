@@ -31,12 +31,14 @@ public class TelaEntradaProd extends JPanel {
     private final ImageIcon iconSelecionado;
     private ImageIcon iconMenu;
     private ImageIcon iconFechar;
+    private final ImageIcon iconOla; 
 
     private JButton btnEntradaProd;
     private JButton btnMenu;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JButton btnFechar;
+    private JButton olaAdm;
 
     private JComboBox jcbNome;
     
@@ -56,10 +58,11 @@ public class TelaEntradaProd extends JPanel {
 
         setLayout(null);
 
-        fundo = new ImageIcon("src/imagens/fundoEntradaProd.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnSelecionado.png");
-        iconMenu = new ImageIcon("src/imagens/iconMenu.png");
-        iconFechar = new ImageIcon("src/imagens/btnEncerrar.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoEntradaProd.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnSelecionado.png");
+        iconMenu = new ImageIcon("src/imagens/iconBotoes/iconMenu.png");
+        iconFechar = new ImageIcon("src/imagens/iconBotoes/btnEncerrar.png");
+        iconOla = new ImageIcon("src/imagens/mensagens/olaAdm.png");
 
         //Inicialização e configurações dos botões       
         btnEntradaProd = new JButton(iconSelecionado);
@@ -146,7 +149,13 @@ public class TelaEntradaProd extends JPanel {
         txtTotalGerado.setCaretColor(Color.GRAY);
         txtTotalGerado.setEditable(true);
         
-        //Configuração do painel de rolagem
+        olaAdm = new JButton(iconOla);
+        olaAdm.setBounds(0, 65, 167, 65);
+        olaAdm.setContentAreaFilled(false);
+        olaAdm.setBorderPainted(false);
+        olaAdm.setFocusable(false);
+        
+        //Configuração do painel de rolagem e tabela
         jspRolagem = new JScrollPane();
         jspRolagem.setBounds(205, 310, 615, 110);
         jspRolagem.setBackground(Color.GRAY);
@@ -185,6 +194,7 @@ public class TelaEntradaProd extends JPanel {
         add(jspRolagem);
         add(txtTotalGerado);
         add(btnFechar);
+        add(olaAdm);
 
         btnMenu.addActionListener(new ActionListener() {
             @Override

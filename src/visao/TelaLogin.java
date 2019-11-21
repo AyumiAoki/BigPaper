@@ -52,9 +52,9 @@ public class TelaLogin extends JPanel {
         op = 0;
         nome = "";
 
-        fundo = new ImageIcon("src/imagens/fundoLogin1.png");
-        iconSelecionado = new ImageIcon("src/imagens/btnEntrarSelecionado.png");
-        iconOpSelecionado = new ImageIcon("src/imagens/btnOpSelecionado.png");
+        fundo = new ImageIcon("src/imagens/fundoTelas/fundoLogin.png");
+        iconSelecionado = new ImageIcon("src/imagens/iconBotoes/btnEntrarSelecionado.png");
+        iconOpSelecionado = new ImageIcon("src/imagens/iconBotoes/btnOpSelecionado.png");
 
         btnEntrar = new JButton();
         btnEntrar.setBounds(609, 396, 108, 32);
@@ -112,7 +112,7 @@ public class TelaLogin extends JPanel {
             public void focusLost(FocusEvent e) {
             }
         });
-                
+
         add(btnEntrar);
         add(btnFuncionario);
         add(btnAdm);
@@ -155,27 +155,51 @@ public class TelaLogin extends JPanel {
 
                 if (op != 0) {
                     if (!nome.equals("") && !senha.equals("")) {
-                        if (op == 1) {
+                        if (!nome.equals("Usuário") && !senha.equals("Senha")) {
+                            if (op == 1) {
 
-                            TelaMenuFun telaFun = new TelaMenuFun(jf);
-                            setVisible(false);
-                            jf.add(telaFun);
-                            telaFun.requestFocus();
+                                daoFun = new DaoFuncionario();
 
-                        } else {
-                            if (daoFun.buscarFuncionario(nome, senha)) {
+                                if (daoFun.buscarFuncionario(nome, senha)) {
 
-                                TelaMenuAdm telaAdm = new TelaMenuAdm(jf);
-                                setVisible(false);
-                                jf.add(telaAdm);
-                                telaAdm.requestFocus();
+                                    TelaMenuFun telaFun = new TelaMenuFun(jf);
+                                    setVisible(false);
+                                    jf.add(telaFun);
+                                    telaFun.requestFocus();
+                                } else {
+
+                                    JOptionPane.showMessageDialog(null, "Senha ou login inválido!");
+                                    txtLogin.setText("");
+                                    txtSenha.setText("");
+                                    txtLogin.requestFocus();
+                                }
 
                             } else {
-                                txtLogin.setText("");
-                                txtSenha.setText("");
-                                JOptionPane.showMessageDialog(null, "Senha ou login incorreto!");
+                                if (nome.equals("admin")) {
+                                    if (senha.equals("123")) {
+
+                                        TelaMenuAdm telaAdm = new TelaMenuAdm(jf);
+                                        setVisible(false);
+                                        jf.add(telaAdm);
+                                        telaAdm.requestFocus();
+                                    } else {
+
+                                        JOptionPane.showMessageDialog(null, "Senha inválida!");
+                                        txtSenha.setText("");
+                                        txtSenha.requestFocus();
+                                    }
+
+                                } else {
+
+                                    JOptionPane.showMessageDialog(null, "Login inválido!");
+                                    txtLogin.setText("");
+                                    txtLogin.requestFocus();
+                                }
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                         }
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                     }
@@ -202,7 +226,6 @@ public class TelaLogin extends JPanel {
                 btnAdm.setIcon(iconOpSelecionado);
             }
         });
-
     }
 
     @Override
